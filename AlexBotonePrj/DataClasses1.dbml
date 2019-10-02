@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Fotbal" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Fotbal.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FotbalConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Echipa" Member="Echipas">
+    <Type Name="Echipa">
+      <Column Name="EchipaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Denumire" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Liga" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Echipa_Jucator" Member="Jucators" ThisKey="EchipaId" OtherKey="EchipaID" Type="Jucator" />
+      <Association Name="Liga_Echipa" Member="Liga1" ThisKey="Liga" OtherKey="LigaId" Type="Liga" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Jucator" Member="Jucators">
+    <Type Name="Jucator">
+      <Column Name="JucatorId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nume" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Prenume" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Varsta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EchipaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Echipa_Jucator" Member="Echipa" ThisKey="EchipaID" OtherKey="EchipaId" Type="Echipa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Liga" Member="Ligas">
+    <Type Name="Liga">
+      <Column Name="LigaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NumeLiga" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Liga_Echipa" Member="Echipas" ThisKey="LigaId" OtherKey="Liga" Type="Echipa" />
+    </Type>
+  </Table>
+</Database>
